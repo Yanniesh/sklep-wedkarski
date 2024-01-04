@@ -76,18 +76,13 @@ class SliderEditController extends Controller
         $photoId = request('id');
 
         try {
-            // Sprawdź, czy istnieje rekord o danym ID
             $existingOrder = photos_orders::findOrFail(1);
-
-            // Sprawdź, czy zdjęcie już istnieje w photos_ids
-            if (strpos($existingOrder->photos_ids, $photoId) === false) {
-                // Jeżeli nie istnieje, dodaj nowe ID do photos_ids
+            if (!str_contains($existingOrder->photos_ids, $photoId)) {
                 $jsonArray = json_decode($existingOrder->photos_ids, true);
                 $jsonArray[] = $photoId;
                 $existingOrder->update(['photos_ids' => json_encode($jsonArray)]);
             }
         } catch (ModelNotFoundException $e) {
-            // Jeżeli nie istnieje rekord o danym ID, utwórz nowy rekord
             photos_orders::create([
                 'id' => 1,
                 'photos_ids' => json_encode([$photoId]),

@@ -26,26 +26,32 @@ class CartController extends Controller
     public function index(): Application|View|Factory|\Illuminate\Contracts\Foundation\Application
     {
         $user = auth()->user();
-        $products = $user->carts;
-        return view('cart.index',compact('products'));
+        $carts = $user->carts;
+        $carts = $carts->where('processed', false);
+        return view('cart.index',compact('carts'));
     }
 
     public function update(Request $request, $id): RedirectResponse
     {
-        $Cart = Cart::query()->where('product_id', $id)->first();
-        $quantity = 1;
-        $price = Product::query()->where('id', $id)->first()->price;
+        $Cart = Cart::query()->where('id', $id)->first();
+        $product_id = $Cart->product_id;
+        $price = Product::query()->where('id', $product_id)->first()->price;
+
         if($Cart == null){
             Cart::query()->create([
                 'product_id' => $id,
                 'user_id' => auth()->id(),
-                'quantity'=> $quantity,
+                'quantity'=> 1,
                 'amount' => $price,
             ]);
         }else{
-            $Cart->quantity = $Cart->quantity + 1;
-            $Cart->amount = $price * $Cart->quantity;
-            $Cart->save();
+             if($request->has('quantityFactor') and $request->input('quantityFactor') == 'increase'){
+                $Cart->quantity = $Cart->quantity + 1;
+                }else{
+                $Cart->quantity = $Cart->quantity - 1;
+                }
+                $Cart->amount = $price * $Cart->quantity;
+                $Cart->save();
         }
 
         return redirect()->back()->with('status', 'Dodano produkt do koszyka!');

@@ -27,8 +27,7 @@ Route::get('/slideredit/edit/{id}', [App\Http\Controllers\SliderEditController::
 Route::delete('/slideredit/{id}', [App\Http\Controllers\SliderEditController::class, 'destroy'])->name('slideredit.destroy');
 Route::put('/slideredit/{id}', [App\Http\Controllers\SliderEditController::class, 'update'])->name('slideredit.update');
 
-Route::get('/order', [App\Http\Controllers\OrderController::class, 'index'])->name('order');
-Route::put('/order/{id}', [App\Http\Controllers\OrderController::class, 'update'])->name('order.update');
+Route::put('/order/{id}', [App\Http\Controllers\SliderOrderController::class, 'update'])->name('order.update');
 
 
 Route::get('/shop', [App\Http\Controllers\ShopController::class, 'index'])->name('shop');
@@ -58,3 +57,8 @@ Route::put('/admin/comments/{id}', [App\Http\Controllers\CommentAcceptingControl
 Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
 Route::put('/cart/{id}', [App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart/{id}', [App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
+
+
+Route::get('/orders', [App\Http\Controllers\OrdersController::class, 'index'])->name('order.index');
+Route::post('/orders', [App\Http\Controllers\OrdersController::class, 'store'])->name('order.store');
+//Route::delete('/orders/{id}', [App\Http\Controllers\OrdersController::class, 'delete'])->name('cart.destroy');
