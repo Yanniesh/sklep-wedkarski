@@ -519,6 +519,7 @@ h3 {
     padding: 1rem;
     background-color: #718096;
     margin-bottom: 1rem;
+    cursor: pointer;
 }
 
 .MainShopContainer{
@@ -912,4 +913,11 @@ h3 {
     margin-right: 2px;
     text-align: center;
     font-size: 2rem;
+}
+.QuantityButton:hover{
+    cursor: pointer;
+    background-color: rgba(124, 93, 162, 0.98);
+}
+.alert-danger{
+    color: red;
 }

@@ -14,11 +14,12 @@ class OrdersController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index(): \Illuminate\Contracts\Foundation\Application
+    public function index(): \Illuminate\Contracts\View\View
     {
         $user = auth()->user();
         $orders = $user->orders;
-        return view('orders.index',compact('orders'));
+        $orders = $orders->where('paid', false);
+        return view('shop.orders.index',compact('orders'));
     }
 
     /**
@@ -26,7 +27,6 @@ class OrdersController extends Controller
      */
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
-        dd("co jest kurwa");
         $rules = [
             'name' => 'required|string|regex:/^[A-Za-z]+$/',
             'surname' => 'required|string|regex:/^[A-Za-z]+$/',
@@ -34,7 +34,7 @@ class OrdersController extends Controller
             'city' => 'required|string',
             'street' => 'required|string',
             'houseNumber' => 'required|numeric',
-            'phoneNumber' => 'required|numeric',
+            'phoneNumber' => 'required|string',
         ];
 
         $messages = [
@@ -47,11 +47,6 @@ class OrdersController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $user = auth()->user();
-        $carts = $user->carts;
-        $order = Order::query()->create([
-            'user_id' => auth()->id()
-        ]);
         $address= Address::query()->create([
             'name' => $request->input('name'),
             'surname' => $request->input('surname'),
@@ -60,24 +55,35 @@ class OrdersController extends Controller
             'street' => $request->input('street'),
             'house_number' => $request->input('houseNumber'),
             'phone_number' => $request->input('phoneNumber'),
-            'order_id' => $order->id,
         ]);
-        $carts->where('processed', false)->update([
-            'processed' => true,
-            'order_id' => $order->id
+        $user = auth()->user();
+        $amount = $request->input('amount');
+        $order = Order::query()->create([
+            'amount' => $amount,
+            'user_id' => auth()->id(),
+            'address_id' => $address->id,
         ]);
-        $order->update(['address_id' => $address->id]);
-        return redirect()->route('orders.index')->with('status', 'Zamówienie w trakcie realizacji!');
+        $carts = $user->carts;
+
+        foreach ($carts as $cart) {
+            $cart->where('processed', false)->update([
+                'processed' => true,
+                'order_id' => $order->id,
+            ]);
+        }
+//        return redirect()->route('order.index')->with('status', 'Zamówienie w trakcie realizacji!');
+
+        return redirect()->route('send.mail.created');
     }
-    public function update(Request $request, $id): \Illuminate\Http\RedirectResponse
+    public function update( $id): \Illuminate\Http\RedirectResponse
     {
         Order::query()->find($id)->update(['paid' => true]);
 
-        return redirect()->route('orders.index')->with('status', 'Zamówienie opłacone!');
+        return redirect()->route('send.mail.shipped');
     }
-    public function destroy(Request $request, $id): \Illuminate\Http\RedirectResponse
+    public function destroy($id): \Illuminate\Http\RedirectResponse
     {
         Order::query()->find($id)->delete();
-        return redirect()->route('orders.index')->with('status', 'Zamówienie usunięte!');
+        return redirect()->route('shop.orders.index')->with('status', 'Zamówienie usunięte!');
     }
 }

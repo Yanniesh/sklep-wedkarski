@@ -30,8 +30,6 @@
 
                             <div>
                                 <input id="nickname" type="text" class="form-control pad-TB-5 @error('nickname')is-invalid @enderror" name="nickname" value="{{ old('nickname') }}" required autocomplete="nickname" autofocus>
-
-
                             </div>
                         </div>
 
@@ -40,8 +38,6 @@
 
                             <div class="form-control pad-TB-5">
                                 <input id="password" type="password" class="form-control pad-TB-5 @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-
                             </div>
                         </div>
 

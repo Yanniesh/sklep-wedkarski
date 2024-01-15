@@ -9,7 +9,7 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['address_id', 'user_id', 'paid'];
+    protected $fillable = ['address_id', 'user_id', 'paid', 'amount'];
 
     public function carts(): \Illuminate\Database\Eloquent\Relations\HasMany
     {

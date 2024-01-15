@@ -59,6 +59,23 @@ Route::put('/cart/{id}', [App\Http\Controllers\CartController::class, 'update'])
 Route::delete('/cart/{id}', [App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
 
 
-Route::get('/orders', [App\Http\Controllers\OrdersController::class, 'index'])->name('order.index');
-Route::post('/orders', [App\Http\Controllers\OrdersController::class, 'store'])->name('order.store');
-//Route::delete('/orders/{id}', [App\Http\Controllers\OrdersController::class, 'delete'])->name('cart.destroy');
+Route::get('/orders', [App\Http\Controllers\OrdersController::class, 'index'])->name('shop.orders.index');
+Route::post('/orders', [App\Http\Controllers\OrdersController::class, 'store'])->name('shop.orders.store');
+Route::put('/orders/{id}', [App\Http\Controllers\OrdersController::class, 'update'])->name('shop.orders.update');
+Route::delete('/orders/{id}', [App\Http\Controllers\OrdersController::class, 'destroy'])->name('shop.orders.destroy');
+
+
+Route::get('send-mail-shipped', [App\Http\Controllers\MailController::class, 'sendShippedMail'])->name('send.mail.shipped');
+Route::get('send-mail-created', [App\Http\Controllers\MailController::class, 'sendCreatedMail'])->name('send.mail.created');
+
+//use Illuminate\Http\Request;
+//
+//Route::get('/billing', function (Request $request) {
+//    $stripeCustomer = $request->user()->createOrGetStripeCustomer();
+//    return $stripeCustomer->redirectToBillingPortal(route('shop.orders.index'));
+//})->middleware(['auth'])->name('billing');
+
+//Route::get('/billing-portal', function (Request $request) {
+//
+//    return $request->user()->redirectToBillingPortal();
+//});

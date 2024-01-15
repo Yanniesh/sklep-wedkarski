@@ -27,6 +27,7 @@
                             <form method="POST" action="{{route('cart.update', $cart->id)}}">
                                 {{csrf_field()}}
                                 {{method_field('PUT')}}
+                                <input type="hidden" name="productId" value="{{$cart->product->id}}">
                                 <input type="hidden" name="quantityFactor" value="decrease">
                                 <button class="QuantityButton">-</button>
                             </form>
@@ -36,6 +37,7 @@
                             <form method="POST" action="{{route('cart.update', $cart->id)}}">
                                 {{csrf_field()}}
                                 {{method_field('PUT')}}
+                                <input type="hidden" name="productId" value="{{$cart->product->id}}">
                                 <input type="hidden" name="quantityFactor" value="increase">
                                 <button class="QuantityButton">+</button>
                             </form>
@@ -58,55 +60,72 @@
             </tbody>
         </table>
         Do zapłaty: {{ $totalAmount }}
-        <form class="OrderForm" method="POST" action="{{route('order.store')}}">
+        <form class="OrderForm" method="POST" action="{{route('shop.orders.store')}}">
             {{csrf_field()}}
+            <input type="hidden" name="amount" value="{{ $totalAmount }}">
             <table class="OrderForm">
                 <tbody class="OrderFormBody">
                 <tr>
                     <td>
                         <label for="name">Imię</label>
-                        <input id="name" type="text" name="name" required placeholder="Imię">
+                        <input id="name" type="text" name="name" value="{{ old('name') }}" required placeholder="Imię">
                     </td>
                 </tr>
                 <tr class="Label-Input">
                     <td>
                         <label for="surname">Nazwisko</label>
-                        <input id="surname" type="text" name="surname" required placeholder="Nazwisko">
+                        <input id="surname" type="text" name="surname" value="{{ old('surname') }}" required placeholder="Nazwisko">
                     </td>
                 </tr>
                 <tr class="">
                     <td>
                         <label for="postalCode">Kod Pocztowy</label>
-                        <input id="postalCode" type="text" name="postalCode" pattern="\d{2}-\d{3}" required placeholder="__-___">
+                        <input id="postalCode" type="text" name="postalCode" value="{{ old('postalCode') }}" pattern="\d{2}-\d{3}" required placeholder="__-___">
                     </td>
                 </tr>
                 <tr class="">
                     <td>
-                        <label for="City">Miasto</label>
-                        <input id="City" type="text" name="city" required placeholder="Miasto">
+                        <label for="city">Miasto</label>
+                        <input id="city" type="text" name="city" value="{{ old('city') }}" required placeholder="Miasto">
                     </td>
                 </tr>
                 <tr class="">
                     <td>
-                        <label for="Street">Ulica</label>
-                        <input id="Street" type="text" name="street" required placeholder="Ulica">
+                        <label for="street">Ulica</label>
+                        <input id="street" type="text" name="street" value="{{ old('street') }}" required placeholder="Ulica">
                     </td>
                 </tr>
                 <tr class="">
                     <td>
                         <label for="houseNumber">Numer Domu</label>
-                        <input id="houseNumber" type="text" pattern="\d+" name="houseNumber" required>
+                        <input id="houseNumber" type="text" pattern="\d+" name="houseNumber" value="{{ old('houseNumber') }}" required>
                     </td>
                 </tr>
                 <tr class="">
                     <td>
                         <label for="phoneNumber">Numer Telefonu</label>
-                        <input id="phoneNumber" type="text" name="phoneNumber" required>
+                        <input id="phoneNumber" type="text" name="phoneNumber" value="{{ old('phoneNumber') }}" required>
                     </td>
                 </tr>
                 </tbody>
             </table>
+            @if($carts->count()!=0)
             <button style="text-align: center; font-size: 2rem;" class="save_order_button">Zamów</button>
+            @endif
+            @if (session('status'))
+                <div class="alert alert-success" style="color: yellow; margin: 20px; padding: 10px; border: solid black 2px" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </form>
     </div>
     <script>

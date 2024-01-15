@@ -99,6 +99,9 @@
                                     <a class="nav-link" href="{{ route('cart.index') }}">Koszyk</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('shop.orders.index') }}">Zamówienia</a>
+                                </li>
+                                <li class="nav-item">
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" >
                                         @csrf
                                         <a class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" href="">

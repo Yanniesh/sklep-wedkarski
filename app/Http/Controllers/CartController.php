@@ -34,12 +34,12 @@ class CartController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
         $Cart = Cart::query()->where('id', $id)->first();
-        $product_id = $Cart->product_id;
+        $product_id = $request->input('productId');
         $price = Product::query()->where('id', $product_id)->first()->price;
 
         if($Cart == null){
             Cart::query()->create([
-                'product_id' => $id,
+                'product_id' => $product_id,
                 'user_id' => auth()->id(),
                 'quantity'=> 1,
                 'amount' => $price,
@@ -47,11 +47,14 @@ class CartController extends Controller
         }else{
              if($request->has('quantityFactor') and $request->input('quantityFactor') == 'increase'){
                 $Cart->quantity = $Cart->quantity + 1;
-                }else{
+                }
+             else{
                 $Cart->quantity = $Cart->quantity - 1;
                 }
-                $Cart->amount = $price * $Cart->quantity;
-                $Cart->save();
+             $Cart->amount = $price * $Cart->quantity;
+           if($Cart->quantity>0){
+             $Cart->save();
+           }
         }
 
         return redirect()->back()->with('status', 'Dodano produkt do koszyka!');

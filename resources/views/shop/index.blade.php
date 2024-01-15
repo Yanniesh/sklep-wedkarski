@@ -37,9 +37,10 @@
                 </div>
                 <div class="productDesc">
                     @auth
-                        <form method="POST" style="display: flex; flex-wrap: wrap;" action="{{route('cart.update', $product->id)}}">
+                        <form method="POST" style="display: flex; flex-wrap: wrap;" action="{{route('cart.update', -1)}}">
                             {{csrf_field()}}
                             {{method_field('PUT')}}
+                            <input type="hidden" name="productId" value="{{$product->id}}">
                             <button class="save_order_button">Dodaj do koszyka!</button>
                         </form>
                     @if(auth()->user()['role']=="admin" or auth()->user()['id'] == $product->owner->id)
