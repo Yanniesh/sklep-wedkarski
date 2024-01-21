@@ -30,19 +30,16 @@
                             </div>
                         </div>
 
-{{--                        @foreach ($product->photos as $photo)--}}
-{{--                            <div class="productPhoto">--}}
-{{--                                <img src="{{ 'http://' . request()->getHttpHost() }}/{{ $photo->path }}" alt="{{ $product->name }} Image">--}}
-{{--                            </div>--}}
-{{--                        @endforeach--}}
-{{--                        @if(count($product->photos) == 0)--}}
-{{--                                <div class="productPhoto">--}}
-{{--                                    <img class="image-item" src="https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg" alt="img-3"/>--}}
-{{--                                </div>--}}
-{{--                        @endif--}}
-
                         <div class="divFlexCenter">
                             <div class="productDesc">
+                                @auth
+                                    <form method="POST" style="display: flex; flex-wrap: wrap;" action="{{route('cart.update', -1)}}">
+                                        {{csrf_field()}}
+                                        {{method_field('PUT')}}
+                                        <input type="hidden" name="quantityFactor" value="increase">
+                                        <input type="hidden" name="productId" value="{{$product->id}}">
+                                        <button class="save_order_button">Dodaj do koszyka!</button>
+                                    </form>
                                 @if(auth()->user()['role']=="admin" or auth()->user()['id'] == $product->owner->id)
                                     <form method="POST" action="{{route('product.destroy', $product->id)}}">
                                         {{csrf_field()}}
@@ -50,6 +47,7 @@
                                         <button class="save_order_button">Usuń produkt</button>
                                     </form>
                                 @endif
+                                @endauth
                                 <h2><b>{{ $product->name }}</b></h2>
                                 <p><b>Kategoria:</b>   &#160;&#160;{{ $product->category->name }} </p>
                                 <p style="color: lightgreen;"><b>Cena:</b>   &#160;&#160;{{ $product->price }}zł</p>

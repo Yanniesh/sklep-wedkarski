@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -13,12 +14,14 @@ class OrderCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $Carts;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($_orderCarts)
     {
-        //
+        $this->Carts =  $_orderCarts;
     }
 
     /**

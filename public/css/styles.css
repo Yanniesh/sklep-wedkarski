@@ -892,16 +892,33 @@ h3 {
     flex-wrap: wrap;
     flex-direction: column;
     align-content: center;
+    margin-top: 20px;
 }
 .OrderFormBody{
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+    /*background-color: #6c7c8c;*/
+    min-width: 50vw;
+    border: #a9b3bd solid 2px;
 
+}
+.OrderForm button{
+    align-self: center;
+    width: 20%;
+    margin-top: 20px;
+}
+input::placeholder {
+    color: #000000;
+}
+input{
+    border: #000000 solid 2px;
 }
 .Label-Input{
     display: flex;
     justify-content: space-between;
+    padding: 10px;
+    margin:  0 120px;
 }
 .QuantityButton{
     border-radius: 50%;
@@ -921,3 +938,11 @@ h3 {
 .alert-danger{
     color: red;
 }
+.description{
+    width: 60vw;
+    text-align: left;
+}
+.description-paragraph{
+    margin-bottom: 20px;
+}
+

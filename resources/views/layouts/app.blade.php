@@ -80,7 +80,7 @@
             <nav class="navbar">
                         <ul class="navbar-list">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('shop') }}">{{ __('Shop') }}</a>
+                                <a class="nav-link" href="{{ route('shop') }}">{{ __('Sklep') }}</a>
                             </li>
                             @guest
                                 @if (Route::has('login'))

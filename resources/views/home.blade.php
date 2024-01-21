@@ -16,7 +16,7 @@
                         @if (Route::has('CategoryEdit') and auth()->user()->role === 'admin')
                             <a class="nav-link nav-item margin-5" href="{{ route('CategoryEdit') }}">Dodaj Kategorie</a>
                         @endif
-                        @if (Route::has('product.create'))
+                        @if (Route::has('product.create') and auth()->user()->role === 'admin')
                             <a class="nav-link nav-item margin-5" href="{{ route('product.create') }}">Dodaj Produkt</a>
                         @endif
                         @if (Route::has('commentsAccept.index') and auth()->user()->role === 'admin')

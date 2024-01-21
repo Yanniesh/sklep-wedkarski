@@ -2,6 +2,8 @@
 
 namespace App\Mail;
 
+use App\Models\Address;
+use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -12,13 +14,16 @@ use Illuminate\Queue\SerializesModels;
 class OrderShipped extends Mailable
 {
     use Queueable, SerializesModels;
+    public $orderAddress;
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($id)
     {
-        //
+        $order = Order::find($id);
+        $address= Address::query()->where('id', $order->address_id)->first();
+        $this->orderAddress = $address;
     }
 
     /**

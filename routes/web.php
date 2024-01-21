@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PaymentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,13 +60,20 @@ Route::delete('/cart/{id}', [App\Http\Controllers\CartController::class, 'destro
 
 
 Route::get('/orders', [App\Http\Controllers\OrdersController::class, 'index'])->name('shop.orders.index');
+Route::get('/orders/show/{id}', [App\Http\Controllers\OrdersController::class, 'show'])->name('shop.orders.show');
 Route::post('/orders', [App\Http\Controllers\OrdersController::class, 'store'])->name('shop.orders.store');
 Route::put('/orders/{id}', [App\Http\Controllers\OrdersController::class, 'update'])->name('shop.orders.update');
 Route::delete('/orders/{id}', [App\Http\Controllers\OrdersController::class, 'destroy'])->name('shop.orders.destroy');
 
 
-Route::get('send-mail-shipped', [App\Http\Controllers\MailController::class, 'sendShippedMail'])->name('send.mail.shipped');
-Route::get('send-mail-created', [App\Http\Controllers\MailController::class, 'sendCreatedMail'])->name('send.mail.created');
+Route::get('send-mail-shipped/{id}', [App\Http\Controllers\MailController::class, 'sendShippedMail'])->name('send.mail.shipped');
+Route::get('send-mail-created/{id}', [App\Http\Controllers\MailController::class, 'sendCreatedMail'])->name('send.mail.created');
+
+
+Route::get('/payment/checkout', [PaymentController::class, 'showCheckout'])->name('payment.checkout.index');
+Route::post('/payment/checkout/{id}', [PaymentController::class, 'createCheckoutSession'])->name('payment.checkout.process');
+Route::get('/payment/success/{id}', [PaymentController::class, 'success'])->name('payment.success');
+Route::get('/payment/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
 
 //use Illuminate\Http\Request;
 //

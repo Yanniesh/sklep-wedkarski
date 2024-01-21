@@ -66,43 +66,44 @@
             <table class="OrderForm">
                 <tbody class="OrderFormBody">
                 <tr>
-                    <td>
+                    <td class="Label-Input">
                         <label for="name">Imię</label>
                         <input id="name" type="text" name="name" value="{{ old('name') }}" required placeholder="Imię">
                     </td>
                 </tr>
-                <tr class="Label-Input">
-                    <td>
+                <tr >
+
+                    <td class="Label-Input">
                         <label for="surname">Nazwisko</label>
                         <input id="surname" type="text" name="surname" value="{{ old('surname') }}" required placeholder="Nazwisko">
                     </td>
                 </tr>
-                <tr class="">
-                    <td>
+                <tr >
+                    <td class="Label-Input">
                         <label for="postalCode">Kod Pocztowy</label>
                         <input id="postalCode" type="text" name="postalCode" value="{{ old('postalCode') }}" pattern="\d{2}-\d{3}" required placeholder="__-___">
                     </td>
                 </tr>
-                <tr class="">
-                    <td>
+                <tr>
+                    <td class="Label-Input">
                         <label for="city">Miasto</label>
                         <input id="city" type="text" name="city" value="{{ old('city') }}" required placeholder="Miasto">
                     </td>
                 </tr>
                 <tr class="">
-                    <td>
+                    <td class="Label-Input">
                         <label for="street">Ulica</label>
                         <input id="street" type="text" name="street" value="{{ old('street') }}" required placeholder="Ulica">
                     </td>
                 </tr>
                 <tr class="">
-                    <td>
+                    <td class="Label-Input">
                         <label for="houseNumber">Numer Domu</label>
                         <input id="houseNumber" type="text" pattern="\d+" name="houseNumber" value="{{ old('houseNumber') }}" required>
                     </td>
                 </tr>
                 <tr class="">
-                    <td>
+                    <td class="Label-Input">
                         <label for="phoneNumber">Numer Telefonu</label>
                         <input id="phoneNumber" type="text" name="phoneNumber" value="{{ old('phoneNumber') }}" required>
                     </td>

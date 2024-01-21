@@ -40,6 +40,7 @@
                         <form method="POST" style="display: flex; flex-wrap: wrap;" action="{{route('cart.update', -1)}}">
                             {{csrf_field()}}
                             {{method_field('PUT')}}
+                            <input type="hidden" name="quantityFactor" value="increase">
                             <input type="hidden" name="productId" value="{{$product->id}}">
                             <button class="save_order_button">Dodaj do koszyka!</button>
                         </form>

@@ -18,10 +18,15 @@ class OrdersController extends Controller
     {
         $user = auth()->user();
         $orders = $user->orders;
-        $orders = $orders->where('paid', false);
+//        $orders = $orders->where('paid', false);
         return view('shop.orders.index',compact('orders'));
     }
-
+    public function show($id): \Illuminate\Contracts\View\View
+    {
+        $order = Order::query()->find($id);
+        $carts = $order->carts;
+        return view('shop.orders.show',compact('carts'));
+    }
     /**
      * @throws ValidationException
      */
@@ -73,12 +78,11 @@ class OrdersController extends Controller
         }
 //        return redirect()->route('order.index')->with('status', 'Zamówienie w trakcie realizacji!');
 
-        return redirect()->route('send.mail.created');
+        return redirect()->route('send.mail.created', $order->id);
     }
     public function update( $id): \Illuminate\Http\RedirectResponse
     {
         Order::query()->find($id)->update(['paid' => true]);
-
         return redirect()->route('send.mail.shipped');
     }
     public function destroy($id): \Illuminate\Http\RedirectResponse
