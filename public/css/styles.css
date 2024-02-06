@@ -1,29 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 :root{
     /*--Background: linear-gradient(#84b0b0, #73a0a2, #277e7e);*/
-    --Background: linear-gradient(#3d3046, #273549, #222f2f);
-    --FooterColor:  transparent;
-    --HeaderColor: transparent;
+    --background: var(--background-dark);
+    --background-light: linear-gradient(#ac91c9, #88b7ec, #d8dcdc);
+    --background-dark: linear-gradient(#3d3046, #273549, #222f2f);
+    --button: var(--button-light);
+    --button-light: #b3c9ea;
+    --button-dark: #718096;
+    --text-color: var(--text-dark);
+    --text-dark: white;
+    --text-light: black;
+    --table: var(--table-dark);
+    --table-dark: #674444;
+    --table-light: #8c7373;
+    --footer-color:  transparent;
+    --header-color: transparent;
 }
 *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: var(--Background);
+    background-color: var(--background);
 }
 html{
-    background-color: var(--Background);
-    background:  var(--Background);
+    background-color: var(--background);
+    background:  var(--background);
+    text-shadow: none;
 }
 li, a, button, body, .form-control{
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
     font-size: 24px;
-    color: #ffffff;
     background-color: transparent;
     text-decoration: none;
     text-align: center;
     justify-content: center;
+    color: var(--text-color);
 }
 header{
     display: flex;
@@ -32,7 +44,7 @@ header{
     padding: 2px 10px;
     flex-wrap: wrap;
     position: relative;
-    background-color: var(--HeaderColor);
+    background-color: var(--header-color);
     flex-direction: column;
 }
 img{
@@ -125,7 +137,7 @@ footer{
     padding: 5px;
     /*top: 95vh;*/
     position: relative;
-    background-color: var(--FooterColor);
+    background-color: var(--footer-color);
 }
 .copyright{
     align-self: center;
@@ -517,7 +529,7 @@ h3 {
 
 .save_order_button{
     padding: 1rem;
-    background-color: #718096;
+    background-color: var(--button);
     margin-bottom: 1rem;
     cursor: pointer;
 }
@@ -551,11 +563,11 @@ h3 {
     margin-left: 20px;
     padding-bottom: 5px;
     list-style-type: '\2192';
-    text-shadow: black 3px 3px 20px;
+    /*text-shadow: black 3px 3px 20px;*/
     cursor: pointer;
 }
 
-.category :hover{
+.CategoryDeleteForm :hover{
     color: #a8ece9;
 }
 .CategoryDeleteForm{
@@ -644,7 +656,7 @@ h3 {
     justify-content: space-between;
     padding: 10px;
     text-align: left;
-    background-color: #6a6d70;
+    background-color: #717a81;
 }
 .commentdiv{
     text-align: left;
@@ -865,7 +877,7 @@ h3 {
     scale: 0.8;
 }
 .unauthorized{
-    background-color: #efdfdf;
+    background-color: #babaa9;
 }
 
 
@@ -882,7 +894,7 @@ h3 {
 
 
 .Cart-Products-List th {
-    background-color: #62624b;
+    background-color: var(--table);
 }
 .ClickPointer{
     cursor: pointer;
@@ -946,3 +958,18 @@ input{
     margin-bottom: 20px;
 }
 
+#themeToggleBtn{
+    background-color: #4a5568;
+    color: #ffffff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+
+}
+#themeToggleBtn:hover {
+    background-color: #718096;
+    color: #ffffff;
+}

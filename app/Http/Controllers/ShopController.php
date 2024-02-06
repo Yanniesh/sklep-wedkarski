@@ -45,10 +45,10 @@ class ShopController extends Controller
                             ->where('category_id', $categoryId);
                     });
                 })
-                ->paginate(3);
+                ->paginate(10);
         }
         else{
-            $products = Product::query()->paginate(3);
+            $products = Product::query()->paginate(10);
         }
 
         return view('shop.index',compact('parentCategories','products','backCategory'));
