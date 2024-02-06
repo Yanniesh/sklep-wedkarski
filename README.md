@@ -42,7 +42,8 @@ Platforma umożliwia zarówno użytkownikom, jak i administratorom wygodne korzy
 ```bash
    php artisan migrate --seed
 ```
-4.Skonfiguruj plik .env
+4.Skonfiguruj plik .env.
+
 5.Uruchom aplikację:
 ```bash
    php artisan serve
