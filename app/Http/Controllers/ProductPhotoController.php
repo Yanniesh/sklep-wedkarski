@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ProductPhoto;
 use Exception;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,7 +14,8 @@ class ProductPhotoController extends Controller
     {
         $this->middleware('auth');
     }
-   public function destroy($id){
+   public function destroy($id): RedirectResponse
+   {
        try{
            $photo = ProductPhoto::query()->find($id);
            Storage::disk('public')->delete($photo['path']);

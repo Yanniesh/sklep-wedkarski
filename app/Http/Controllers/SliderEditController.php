@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\photos_orders;
 use App\Models\SliderPhoto;
 use Exception;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-
+use \Illuminate\Http\RedirectResponse;
 class SliderEditController extends Controller
 {
     /**
@@ -25,19 +25,19 @@ class SliderEditController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
-    public function index()
+    public function index(): Renderable
     {
         return view('slider.index');
     }
 
-    public function show()
+    public function show(): Renderable
     {
         $data = SliderPhoto::all();
         return view('slider.edit',$data);
     }
-    public function store()
+    public function store(): RedirectResponse
     {
         $data = request()->validate([
 //            'caption' => 'required',
@@ -45,7 +45,6 @@ class SliderEditController extends Controller
         ]);
         $imagePath = request('image')->store('uploads', 'public');
         $image = Image::make(public_path("{$imagePath}"))->fit(600, 400);
-//        $image = Image::make(public_path("{$imagePath}"));
         $image->save();
         $photo = SliderPhoto::query();
         $photo -> create([
@@ -61,7 +60,8 @@ class SliderEditController extends Controller
         }
         return redirect('/slideredit')->with('status', 'Dodano zdjęcie!');
     }
-    public function destroy(){
+    public function destroy(): RedirectResponse
+    {
         $data = request();
         try{
             $photo = SliderPhoto::query()->find($data['id']);
@@ -72,7 +72,8 @@ class SliderEditController extends Controller
         }
         return redirect('/slideredit')->with('status', 'Usunięto zdjęcie!');
     }
-    public function update(){
+    public function update(): RedirectResponse
+    {
         $photoId = request('id');
 
         try {

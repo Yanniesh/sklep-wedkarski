@@ -3,15 +3,8 @@
 @section('content')
     <div class="contentFlex">
         <div class="div-FormCenter">
-{{--            <div style="text-align:center;" class="nav-item">--}}
-{{--                <a class="nav-link" style="text-align:center; margin: 0 auto"  href="{{ route('order') }}">Ustal kolejność</a>--}}
-{{--            </div>--}}
             <form class="FormCenter" method="post" enctype="multipart/form-data" action="{{ route('slideredit') }}">
                 @csrf
-{{--                    <div class="labelXinput">--}}
-{{--                        <label for="caption" class="pad-TB-5">Opis</label>--}}
-{{--                        <input id="caption" type="text" class="form-control pad-TB-5" name="caption" required>--}}
-{{--                    </div>--}}
                     <div class="labelXinput">
                         <label class="pad-TB-5" for="image">Wybierz zdjęcie do dodania:</label>
                         <input class="form-control pad-TB-5" type="file" id="image" name="image" accept="image/png, image/jpeg" />

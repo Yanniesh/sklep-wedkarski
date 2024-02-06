@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\photos_orders;
 use App\Models\Product;
 use App\Models\SliderPhoto;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -20,9 +21,9 @@ class ShopController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
-    public function index(Request $request)
+    public function index(Request $request): Renderable
     {
         $categoryId = $request['category'];
         $backCategory = null;

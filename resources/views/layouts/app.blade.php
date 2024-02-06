@@ -26,10 +26,6 @@
             <div class="sliderbox">
             <div class="sliderContainer">
                 <div class="slider-wrapper">
-{{--                    <button id="prev-slide" class="slide-button material-symbols-rounded">--}}
-{{--                        chevron_left--}}
-{{--                    </button>--}}
-
                     <ul class="image-list">
                         @if(count(App\Models\photos_orders::all()) == 0 or is_null(App\Models\photos_orders::find(1)->ids_order) or App\Models\photos_orders::find(1)->ids_order == "null"))
                             <img class="image-item" src="https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg" alt="img-1"/>
@@ -58,11 +54,6 @@
 
                         @endif
                     </ul>
-{{--                    @if(count(App\Models\SliderPhoto::all()) > 3)--}}
-{{--                    <button id="next-slide" class="slide-button material-symbols-rounded">--}}
-{{--                        chevron_right--}}
-{{--                    </button>--}}
-{{--                    @endif--}}
                 </div>
                 <div class="slider-scrollbar">
                     <div class="scrollbar-track">
@@ -116,16 +107,7 @@
                                         {{ Auth::user()->name }}
                                     </a>
                                 </li>
-
-{{--                                                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">--}}
-{{--                                        <a class="dropdown-item" href="{{ route('logout') }}"--}}
-{{--                                           onclick="event.preventDefault();--}}
-{{--                                                         document.getElementById('logout-form').submit();">--}}
-{{--                                            {{ __('Logout') }}--}}
-{{--                                        </a>--}}
-
-{{--                                    </div>--}}
-
+                                
                             @endguest
                         </ul>
             </nav>

@@ -7,6 +7,7 @@ use App\Models\Comment;
 use App\Models\Product;
 use App\Models\ProductPhoto;
 use Exception;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -25,9 +26,9 @@ class ProductController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
-    public function create()
+    public function create(): Renderable
     {
         $categories = Category::all();
         $role = auth()->user()['role'];
@@ -40,7 +41,7 @@ class ProductController extends Controller
 
         return view('shop.products.create', compact('categories','products'));
     }
-    public function show($id): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    public function show($id): Renderable
     {
         $product = Product::query()->findOrFail($id);
         $parentCategories = Category::query()->where('category_id', null)->get();
@@ -48,13 +49,13 @@ class ProductController extends Controller
 
         return view('shop.products.show',compact('product', 'parentCategories', 'parentComments'));
     }
-    public function edit($id): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    public function edit($id): Renderable
     {
         $product = Product::query()->findOrFail($id);
         $categories = Category::all();
         return view('shop.products.edit',compact('product', 'categories'));
     }
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): Renderable
     {
         $product = Product::findOrFail($id);
         $product->name = $request->input('name');
@@ -108,7 +109,7 @@ class ProductController extends Controller
             'user_id' => auth()->id(),
         ]);
         foreach ($request->file('images') as $image) {
-            $path = $image->store('uploads/product', 'public'); // Zapisz zdjęcie w storage
+            $path = $image->store('uploads/product', 'public');
             $image = Image::make(public_path("{$path}"))->fit(600, 400);
             $image->save();
             ProductPhoto::query() -> create([

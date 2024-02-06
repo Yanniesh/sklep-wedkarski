@@ -13,8 +13,7 @@ class MailController extends Controller
     public function sendShippedMail($id): \Illuminate\Http\RedirectResponse
     {
 
-//        Mail::to(auth()->user()->email)->send(new OrderShipped($id));
-        Mail::to('yaniesh000@gmail.com')->send(new OrderShipped($id));
+        Mail::to(auth()->user()->email)->send(new OrderShipped($id));
         return redirect()->route('shop.orders.index')->with('status', 'Zamówienie opłacone!');
     }
 
@@ -31,9 +30,7 @@ class MailController extends Controller
             ];
         }
         $orderCartsT['amount'] = $order->amount;
-
-        Mail::to('yaniesh000@gmail.com')->send(new OrderCreated($orderCartsT));
-//        Mail::to(auth()->user()->email)->send(new OrderCreated($id));
+        Mail::to(auth()->user()->email)->send(new OrderCreated($orderCartsT));
         return redirect()->back()->with('status', 'Zamówienie w trakcie realizacji!');
     }
 }

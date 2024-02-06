@@ -4,10 +4,6 @@
 <div class="MainShopContainer">
     <ul class="CategoriesMenuList">
             <ul class="category">
-{{--                @php--}}
-{{--                dd($backCategory->id);--}}
-
-{{--                @endphp--}}
                 @if($backCategory != null)
                     <div class="CategoryDeleteForm">
                             <a style="color: coral; margin-left: -10px; padding: 5px; " href="{{ route('shop', ['category' => $backCategory->id]) }}">Cofnij</a>

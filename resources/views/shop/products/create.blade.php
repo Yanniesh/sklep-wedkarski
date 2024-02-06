@@ -101,7 +101,7 @@
                     if (totalFileSize > maxTotalFileSizeBytes) {
                         // alert(`Łączny rozmiar plików przekracza ${maxTotalFileSizeMB} MB.`);
                         warning.innerText = `Łączny rozmiar plików przekracza ${maxTotalFileSizeMB} MB.`;
-                        input.value = ''; // Wyczyszczenie inputa
+                        input.value = '';
                     }
                 }
             }

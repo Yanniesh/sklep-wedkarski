@@ -18,7 +18,6 @@ class OrdersController extends Controller
     {
         $user = auth()->user();
         $orders = $user->orders;
-//        $orders = $orders->where('paid', false);
         return view('shop.orders.index',compact('orders'));
     }
     public function show($id): \Illuminate\Contracts\View\View
