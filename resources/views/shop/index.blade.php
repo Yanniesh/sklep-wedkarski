@@ -55,7 +55,7 @@
                     <h2>{{ $product->name }}</h2>
                     <p>Sprzedawca:   &#160;&#160;{{ $product->owner->name }} </p>
                     <p>Kategoria:   &#160;&#160;{{ $product->category->name }} </p>
-                    <p style="color: lightgreen;">Cena:   &#160;&#160;{{ $product->price }}zł</p>
+                    <p style="text-decoration: underline;">Cena:   &#160;&#160;{{ $product->price }}zł</p>
                     <p>Opis: <br>  {{ $product->description }}</p>
                 </div>
             </div>

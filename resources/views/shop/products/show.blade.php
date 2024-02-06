@@ -50,7 +50,7 @@
                                 @endauth
                                 <h2><b>{{ $product->name }}</b></h2>
                                 <p><b>Kategoria:</b>   &#160;&#160;{{ $product->category->name }} </p>
-                                <p style="color: lightgreen;"><b>Cena:</b>   &#160;&#160;{{ $product->price }}zł</p>
+                                <p style="text-decoration: underline;"><b>Cena:</b>   &#160;&#160;{{ $product->price }}zł</p>
                                 <p><b>Opis:</b> <br>
                                 <div class="productDesc noBorder" >{{ $product->description }}</p></div>
                             </div>

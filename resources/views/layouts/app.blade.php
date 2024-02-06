@@ -76,6 +76,8 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Barber') }}
                 </a>
+                <button id="themeToggleBtn">Toggle Theme</button>
+
             </div>
             <nav class="navbar">
                         <ul class="navbar-list">
@@ -139,5 +141,6 @@
         </footer>
     </div>
     <script src="{{asset('scripts/slider.js')}}"></script>
+    <script src="{{asset('scripts/themeToggle.js')}}"></script>
 </body>
 </html>
