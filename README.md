@@ -16,17 +16,22 @@ Platforma umożliwia zarówno użytkownikom, jak i administratorom wygodne korzy
 **Zarządzanie sliderem**
 - Dodawanie różnych zdjęć do slidera.
 - Ustalanie kolejności zdjęć.
+
 ### Użytkownik
 - Dodawanie komentarzy do produktów.
 - Usuwanie własnych komentarzy.
 - Dodawanie produktów do koszyka.
 - Składanie zamówienia po uzupełnieniu danych adresowych.
+- Zmiana motywu Light/Dark Theme.
+
 **Płatności**
 - Integracja płatności za pomocą Stripe.
 - Możliwość anulowania zamówienia przed opłaceniem.
+
 **Powiadomienia email**
 - Wysyłanie powiadomień o złożeniu zamówienia.
 - Wysyłanie potwierdzenia otrzymania płatności.
+
 ## Instrukcja instalacji
 1. Sklonuj repozytorium:
    ```bash
